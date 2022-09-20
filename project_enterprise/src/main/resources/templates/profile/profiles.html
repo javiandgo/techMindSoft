@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Listado de Perfiles</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#"> Control de Perfiles</a>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link"
+                                    th:href="@{/profiles}">Control de Perfiles</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <h1>Lista de Perfiles</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/profiles/nuevo}" class="btn btn-primary btn-sm mb3">Agregar perfiles</a>
+        </div>
+    </div>
+    <br>
+
+    <br>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Imagen</th>
+            <th>Telefono</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="profile : ${profiles}">
+            <td th:text="${profile.image}">Imagen</td>
+            <td th:text="${profile.phone}">Telefono</td>
+            <td th:text="${profile.createdAt}">Fecha</td>
+            <td>
+                <a th:href="@{/profiles/editar/{id}(id=${profile.idProfile})}" class="btn btn-info">Editar</a>
+                <a th:href="@{/profiles/{id}(id=${profile.idProfile})}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

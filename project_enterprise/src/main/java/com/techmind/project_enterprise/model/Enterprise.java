@@ -3,13 +3,9 @@ package com.techmind.project_enterprise.model;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -33,8 +29,9 @@ public class Enterprise {
     @Column(name="phone_enterprise",nullable = false, length=150)
     private Integer phone_enterprise;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
     @LastModifiedDate

@@ -1,76 +1,63 @@
 package com.techmind.project_enterprise.controller;
 
-import com.techmind.project_enterprise.dto.EmployeeDTO;
-import com.techmind.project_enterprise.dto.EnterpriseDTO;
-import com.techmind.project_enterprise.dto.ProfileDTO;
-import com.techmind.project_enterprise.exeptions.ModelNotFoundException;
 import com.techmind.project_enterprise.model.Employee;
-import com.techmind.project_enterprise.model.Enterprise;
-import com.techmind.project_enterprise.service.IEmployeService;
-import org.modelmapper.ModelMapper;
+import com.techmind.project_enterprise.model.Profile;
+import com.techmind.project_enterprise.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
-
-@RestController
-@RequestMapping("/employees")
+/*@RestController
+@RequestMapping("/employees")*/
+@Controller
 public class EmployeController {
     @Autowired
-    private IEmployeService service;
-
-    @Autowired
+    private IEmployeeService service;
+    /*@Autowired
     @Qualifier("employeeMapper")
-    private ModelMapper mapper;
-
-    @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> readAll() throws Exception {
-        List<EmployeeDTO> list = service.readAll().stream()
-                .map(c -> mapper.map(c, EmployeeDTO.class))
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(list, HttpStatus.OK);
+    private ModelMapper mapper;*/
+    @GetMapping("/employees")
+    public String viewHomePage(Model model){
+        model.addAttribute("employees",service.getAllEmployees());
+        return "employee/employees";
     }
-
-    @PostMapping
-    public ResponseEntity<EmployeeDTO> create(@Valid @RequestBody EmployeeDTO employeeDto) throws Exception{
-        Employee emp = service.create(mapper.map(employeeDto, Employee.class));
-        EmployeeDTO dto = mapper.map(emp,EmployeeDTO.class);
-        return new ResponseEntity<>(dto,HttpStatus.CREATED);
+    @GetMapping("/employees/nuevo")
+    public String formularioRegistro(Model model){
+        Employee employee = new Employee();
+        model.addAttribute("employee",employee);
+        return "employee/create_employee";
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDTO> readById(@PathVariable("id")Integer id) throws Exception {
-        Employee emp = service.readById(id);
-        if(emp==null){
-            throw new ModelNotFoundException("Id no encontrado " + id );
-        }
-        EmployeeDTO dto = mapper.map(emp,EmployeeDTO.class);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
-    }
-    @PutMapping
-    public ResponseEntity<EmployeeDTO> update(@Valid@RequestBody EmployeeDTO employeeDto) throws Exception{
-        Employee emp = service.readById(employeeDto.getIdEmploye());
-        if (emp==null){
-            throw new ModelNotFoundException("Id no encontrado " + employeeDto.getIdEmploye());
-        }
-        Employee employee= service.update(mapper.map(employeeDto, Employee.class));
-        EmployeeDTO dto = mapper.map(emp,EmployeeDTO.class);
-        return new ResponseEntity<>(dto,HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) throws Exception{
-        Employee employee = service.readById(id);
-        if(employee==null){
-            throw new ModelNotFoundException("Id no encontrado. " + id);
-        }
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PostMapping("/employees")
+    public String saveEmployee(@ModelAttribute("employee")Employee employee){
+        service.saveEmployee(employee);
+        return "redirect:/employees";
 
     }
+    @GetMapping("/employees/editar/{id}")
+    public  String formularioEditar(@PathVariable Integer id,Model model){
+        model.addAttribute("profile",service.getEmployeeById(id));
+        return "profile/edit_employee";
+    }
+    @PostMapping("employees/{id}")
+    public String updateProfiles(@PathVariable Integer id, @ModelAttribute("employee") Employee employee, Model model){
+        Employee employeeExistent = service.getEmployeeById(id);
+        employeeExistent.setIdEmploye(id);
+        employeeExistent.setName_employee(employee.getName_employee());
+        employeeExistent.setEmail_employee(employee.getEmail_employee());
+        employeeExistent.setProfile(employee.getProfile());
+        employeeExistent.setRoleName(employee.getRoleName());
+        employeeExistent.setEnterprise(employee.getEnterprise());
+        employeeExistent.setTransaction(employee.getTransaction());
+        employeeExistent.setCreatedAt(employee.getCreatedAt());
+
+        service.updateEmployee(employeeExistent);
+        return "redirect:/employees";
+    }
+    @GetMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable Integer id){
+        service.deleteEmployeeById(id);
+        return "redirect:/employees";
+    }
+
 }
