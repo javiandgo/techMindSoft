@@ -1,13 +1,23 @@
 package com.techmind.enterprise.Model;
 
-public class Profile {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.
 
-    private String nombreUsuariso;
+@Entity
+@Table(name = "profile")
+public class Profile {
+    @Id
+    private String nombreUsuario;
+    @Column
     private String password;
+    @Column
     private String nombrePersona;
 
     public Profile(String nombreUsuariso, String password, String nombrePersona) {
-        this.nombreUsuariso = nombreUsuariso;
+        this.nombreUsuario = nombreUsuariso;
         this.password = password;
         this.nombrePersona = nombrePersona;
     }
@@ -15,12 +25,12 @@ public class Profile {
     public Profile() {
     }
 
-    public String getNombreUsuariso() {
-        return nombreUsuariso;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombreUsuariso(String nombreUsuariso) {
-        this.nombreUsuariso = nombreUsuariso;
+    public void setNombreUsuario(String nombreUsuariso) {
+        this.nombreUsuario = nombreUsuariso;
     }
 
     public String getPassword() {
