@@ -1,0 +1,8 @@
+Integrantes y Roles Grupo de Desarrollo
+
+John - Desarrollador - Scrum Master
+Alexander - Desarrollador - Analista
+Miguel - Desarrollador - Administrador
+Javier - Desarrollador - Product Owner
+
+
