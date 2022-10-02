@@ -19,14 +19,11 @@ public class Employee {
     @Column(name = "rolEmployee")
     private String rolEmployee;
 
-    MovementMoney movementOne;
-
     public Employee(String name, String email, String enterpriseEmployee, String rolEmployee, MovementMoney movementOne) {
         this.name = name;
         this.email = email;
         this.enterpriseEmployee = enterpriseEmployee;
         this.rolEmployee = rolEmployee;
-        this.movementOne = movementOne;
     }
 
     public Employee() {
@@ -64,11 +61,4 @@ public class Employee {
         this.rolEmployee = rolEmployee;
     }
 
-    public MovementMoney getMovementOne() {
-        return movementOne;
-    }
-
-    public void setMovementOne(MovementMoney movementOne) {
-        this.movementOne = movementOne;
-    }
 }

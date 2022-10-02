@@ -35,4 +35,4 @@ build/
 
 ## PROPIEDADES ##
 
-/src/main/java/resources/application.properties
+/src/main/resources/application.properties

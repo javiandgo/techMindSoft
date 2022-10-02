@@ -12,16 +12,16 @@ public class Enterprise {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
     @Column(name = "phone")
     private int phone;
     @Column(name = "nit")
     private String nit;
 
-    public Enterprise(String name, String adress, int phone, String nit) {
+    public Enterprise(String name, String address, int phone, String nit) {
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.phone = phone;
         this.nit = nit;
     }
@@ -37,12 +37,12 @@ public class Enterprise {
         this.name = name;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPhone() {

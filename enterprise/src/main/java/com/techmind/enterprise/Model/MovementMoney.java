@@ -11,7 +11,7 @@ public class MovementMoney {
     private long id;
     @Column(name = "amountMovement")
     private double amountMovement;
-    @Column(name = detailMovement)
+    @Column(name = "detailMovement")
     private String detailMovement;
 
     public MovementMoney(double amountMovement, String detailMovement) {
