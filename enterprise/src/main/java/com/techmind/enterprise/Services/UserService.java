@@ -28,11 +28,42 @@ public class UserService {
     }
 
     public Employee saveEmployee(Employee employee_param) {
-
         return userRepository.save(employee_param);
     }
 
     public Employee putEmployee(Employee employee_param) {
         return userRepository.save(employee_param);
+    }
+
+    public Employee patchEmployee(Employee employee_param) throws Exception {
+        try {
+            Employee employeeBD = getEmployee(employee_param.getId());
+
+            if(employee_param.getName() != null) {
+                employeeBD.setName(employee_param.getName());
+            }
+
+            if (employee_param.getEmail() != null){
+                employeeBD.setEmail(employee_param.getEmail());
+            }
+
+            if (employee_param.getEnterpriseEmployee() != null) {
+                employeeBD.setEnterpriseEmployee(employee_param.getEnterpriseEmployee());
+            }
+
+            if (employee_param.getRolEmployee() != null) {
+                employeeBD.setRolEmployee(employee_param.getRolEmployee());
+            }
+
+            return saveEmployee(employeeBD);
+
+        } catch (Exception e) {
+            throw new Exception("Usuario no se actualizo, porque no existe");
+        }
+    }
+
+    public String deleteEmployee(Long id) {
+        userRepository.deleteById(id);
+        return "Usuario Eliminado Exitosamente";
     }
 }

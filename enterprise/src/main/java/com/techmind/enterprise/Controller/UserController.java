@@ -1,7 +1,7 @@
 package com.techmind.enterprise.Controller;
 
 import com.techmind.enterprise.Model.Employee;
-import com.techmind.enterprise.Model.UserResponse;
+import com.techmind.enterprise.Model.Response;
 import com.techmind.enterprise.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,18 +50,38 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<UserResponse> postEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Response> postEmployee(@RequestBody Employee employee) {
         return new ResponseEntity<>(
-                new UserResponse("Empleado creado exitosamente",
+                new Response("Empleado creado exitosamente",
                 userService.saveEmployee(employee)),
                 HttpStatus.OK);
     }
 
-    @PutMapping("/usuario")
-    public ResponseEntity<UserResponse> putEmployee(@RequestBody Employee employee) {
+    @PutMapping("/user")
+    public ResponseEntity<Response> putEmployee(@RequestBody Employee employee) {
         return new ResponseEntity<>(
-                new UserResponse("Usuario Actualizado Exitosamente", userService.putEmployee(employee))
+                new Response("Usuario Actualizado Exitosamente", userService.putEmployee(employee))
                 ,HttpStatus.OK);
     }
 
+    @PatchMapping("/user")
+    public ResponseEntity<Response> patchEmployee(@RequestBody Employee employee) {
+        try {
+            return new ResponseEntity<>(
+                    new Response("Actualización Exitosa", userService.patchEmployee(employee)),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new Response(e.getMessage(), null),
+                    HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("user/{id}")
+    public ResponseEntity<Response> deleteEmployee(@PathVariable Long id) {
+        return new ResponseEntity<>(
+                new Response(userService.deleteEmployee(id), null),
+                HttpStatus.OK
+        );
+    }
 }

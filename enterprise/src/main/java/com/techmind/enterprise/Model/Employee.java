@@ -9,7 +9,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -19,7 +18,8 @@ public class Employee {
     @Column(name = "rolEmployee")
     private String rolEmployee;
 
-    public Employee(String name, String email, String enterpriseEmployee, String rolEmployee, MovementMoney movementOne) {
+    public Employee(long id, String name, String email, String enterpriseEmployee, String rolEmployee) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.enterpriseEmployee = enterpriseEmployee;
@@ -27,6 +27,14 @@ public class Employee {
     }
 
     public Employee() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,5 +68,4 @@ public class Employee {
     public void setRolEmployee(String rolEmployee) {
         this.rolEmployee = rolEmployee;
     }
-
 }

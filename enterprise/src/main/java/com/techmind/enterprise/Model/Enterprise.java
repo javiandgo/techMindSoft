@@ -19,14 +19,24 @@ public class Enterprise {
     @Column(name = "nit")
     private String nit;
 
-    public Enterprise(String name, String address, int phone, String nit) {
+    public Enterprise(long id, String name, String address, int phone, String nit) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.nit = nit;
     }
 
+
     public Enterprise() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,4 +70,5 @@ public class Enterprise {
     public void setNit(String nit) {
         this.nit = nit;
     }
+
 }

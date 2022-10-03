@@ -13,7 +13,7 @@ public class MovementMoney {
     private Double amountMovement;
     @Column(name = "detailMovement")
     private String detailMovement;
-
+    @Column(name = "userOwner")
     private String userOwner;
 
     public MovementMoney(Double amountMovement, String detailMovement, String userOwner) {

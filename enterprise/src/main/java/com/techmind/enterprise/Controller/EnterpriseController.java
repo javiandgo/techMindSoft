@@ -2,7 +2,7 @@ package com.techmind.enterprise.Controller;
 
 import com.techmind.enterprise.Model.Employee;
 import com.techmind.enterprise.Model.Enterprise;
-import com.techmind.enterprise.Model.UserResponse;
+import com.techmind.enterprise.Model.Response;
 import com.techmind.enterprise.Services.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class EnterpriseController {
     }
 
     @GetMapping("/enterprise")
-    public ResponseEntity<Enterprise> getEnterprises(@RequestParam Long id) {
+    public ResponseEntity<Object> getEnterprises(@RequestParam Long id) {
         try {
             Enterprise enterprise = enterpriseService.getEnterprise(id);
             return new ResponseEntity<>(enterprise, HttpStatus.OK);
@@ -49,10 +49,17 @@ public class EnterpriseController {
     }
 
     @PostMapping("/enterprise")
-    public ResponseEntity<Object> postEnterprise(@RequestBody Enterprise enterprise) {
+    public ResponseEntity<Response> postEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
-                new UserResponse("Empleado creado exitosamente",
+                new Response("Empresa creada exitosamente",
                         enterpriseService.saveEnterprise(enterprise)),
                 HttpStatus.OK);
+    }
+
+    @PutMapping("/user")
+    public ResponseEntity<Response> putEnterprise(@RequestBody Enterprise enterprise) {
+        return new ResponseEntity<>(
+                new Response("Empresa Actualizada Exitosamente", enterpriseService.putEnterprise(enterprise))
+                ,HttpStatus.OK);
     }
 }
