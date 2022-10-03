@@ -1,16 +1,16 @@
 package com.techmind.enterprise.Model;
 
-public class EmployeeResponse {
+public class UserResponse {
     private String message;
     private Object object;
 
 
-    public EmployeeResponse(String message, Object object) {
+    public UserResponse(String message, Object object) {
         this.message = message;
         this.object = object;
     }
 
-    public EmployeeResponse() {
+    public UserResponse() {
     }
 
     public String getMessage() {

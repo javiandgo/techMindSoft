@@ -10,23 +10,26 @@ public class MovementMoney {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "amountMovement")
-    private double amountMovement;
+    private Double amountMovement;
     @Column(name = "detailMovement")
     private String detailMovement;
 
-    public MovementMoney(double amountMovement, String detailMovement) {
+    private String userOwner;
+
+    public MovementMoney(Double amountMovement, String detailMovement, String userOwner) {
         this.amountMovement = amountMovement;
         this.detailMovement = detailMovement;
+        this.userOwner = userOwner;
     }
 
     public MovementMoney() {
     }
 
-    public double getAmountMovement() {
+    public Double getAmountMovement() {
         return amountMovement;
     }
 
-    public void setAmountMovement(double amountMovement) {
+    public void setAmountMovement(Double amountMovement) {
         this.amountMovement = amountMovement;
     }
 
@@ -36,5 +39,13 @@ public class MovementMoney {
 
     public void setDetailMovement(String detailMovement) {
         this.detailMovement = detailMovement;
+    }
+
+    public String getUserOwner() {
+        return userOwner;
+    }
+
+    public void setUserOwner(String userOwner) {
+        this.userOwner = userOwner;
     }
 }
