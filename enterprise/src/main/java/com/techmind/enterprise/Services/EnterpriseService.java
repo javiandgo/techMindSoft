@@ -36,4 +36,35 @@ public class EnterpriseService {
         return enterpriseRepository.save(enterprise_param);
     }
 
+    public Enterprise patchEnterprise(Enterprise enterprise_param) throws Exception {
+        try {
+            Enterprise enterpriseBD = getEnterprise(enterprise_param.getId());
+
+            if(enterprise_param.getName() != null) {
+                enterpriseBD.setName(enterprise_param.getName());
+            }
+
+            if (enterprise_param.getAddress() != null){
+                enterpriseBD.setAddress(enterprise_param.getAddress());
+            }
+
+            if (enterprise_param.getPhone() != 0) {
+                enterpriseBD.setPhone(enterprise_param.getPhone());
+            }
+
+            if (enterprise_param.getNit() != null) {
+                enterpriseBD.setNit(enterprise_param.getNit());
+            }
+
+            return saveEnterprise(enterpriseBD);
+
+        } catch (Exception e) {
+            throw new Exception("Empresa no se actualizo, porque no existe");
+        }
+    }
+
+    public String deleteEnterprise(Long id) {
+        enterpriseRepository.deleteById(id);
+        return "Empresa Eliminada Exitosamente";
+    }
 }

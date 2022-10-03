@@ -52,14 +52,36 @@ public class EnterpriseController {
     public ResponseEntity<Response> postEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
                 new Response("Empresa creada exitosamente",
-                        enterpriseService.saveEnterprise(enterprise)),
+                enterpriseService.saveEnterprise(enterprise)),
                 HttpStatus.OK);
     }
 
-    @PutMapping("/user")
+    @PutMapping("/enterprise")
     public ResponseEntity<Response> putEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
-                new Response("Empresa Actualizada Exitosamente", enterpriseService.putEnterprise(enterprise))
+                new Response("Empresa Actualizada Exitosamente",
+                        enterpriseService.putEnterprise(enterprise))
                 ,HttpStatus.OK);
+    }
+
+    @PatchMapping("/enterprise")
+    public ResponseEntity<Response> patchEnterprise(@RequestBody Enterprise enterprise) {
+        try {
+            return new ResponseEntity<>(
+                    new Response("Actualización Exitosa", enterpriseService.patchEnterprise(enterprise)),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new Response(e.getMessage(), null),
+                    HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("enterprise/{id}")
+    public ResponseEntity<Response> deleteEnterprise(@PathVariable Long id) {
+        return new ResponseEntity<>(
+                new Response(enterpriseService.deleteEnterprise(id), null),
+                HttpStatus.OK
+        );
     }
 }

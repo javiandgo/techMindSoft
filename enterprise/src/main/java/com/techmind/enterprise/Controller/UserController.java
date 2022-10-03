@@ -60,7 +60,8 @@ public class UserController {
     @PutMapping("/user")
     public ResponseEntity<Response> putEmployee(@RequestBody Employee employee) {
         return new ResponseEntity<>(
-                new Response("Usuario Actualizado Exitosamente", userService.putEmployee(employee))
+                new Response("Usuario Actualizado Exitosamente",
+                        userService.putEmployee(employee))
                 ,HttpStatus.OK);
     }
 
