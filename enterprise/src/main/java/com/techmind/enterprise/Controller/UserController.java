@@ -57,4 +57,11 @@ public class UserController {
                 HttpStatus.OK);
     }
 
+    @PutMapping("/usuario")
+    public ResponseEntity<UserResponse> putEmployee(@RequestBody Employee employee) {
+        return new ResponseEntity<>(
+                new UserResponse("Usuario Actualizado Exitosamente", userService.putEmployee(employee))
+                ,HttpStatus.OK);
+    }
+
 }

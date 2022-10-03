@@ -28,6 +28,11 @@ public class UserService {
     }
 
     public Employee saveEmployee(Employee employee_param) {
+
+        return userRepository.save(employee_param);
+    }
+
+    public Employee putEmployee(Employee employee_param) {
         return userRepository.save(employee_param);
     }
 }
