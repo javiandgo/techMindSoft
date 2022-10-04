@@ -37,9 +37,9 @@ public class MovementService {
         return movementRepository.save(movement_param);
     }
 
-    public MovementMoney patchMovement(MovementMoney movement_param) throws Exception {
+    public MovementMoney patchMovement(MovementMoney movement_param, Long id) throws Exception {
         try {
-            MovementMoney movementBD = getMovements(movement_param.getId());
+            MovementMoney movementBD = getMovements(id);
 
             if(movement_param.getAmountMovement() != null) {
                 movementBD.setAmountMovement(movement_param.getAmountMovement());

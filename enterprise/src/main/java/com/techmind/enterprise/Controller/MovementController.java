@@ -17,16 +17,7 @@ public class MovementController {
     @Autowired
     private MovementService movementService;
     
-    @GetMapping("/movements")
-    public ResponseEntity<List<MovementMoney>> getMovements() {
-        
-        return new ResponseEntity<List<MovementMoney>>(
-                movementService.getMovements(),
-                HttpStatus.OK
-        );
-    }
-    
-    @GetMapping("/movement/{id}")
+    @GetMapping("/enterprises/{id}/movements")
     public ResponseEntity<Object> getMovement(@PathVariable Long id) {
         try {
             MovementMoney movementMoney = movementService.getMovements(id);
@@ -37,38 +28,21 @@ public class MovementController {
         }
     }
 
-    @GetMapping("/movement")
-    public ResponseEntity<Object> getMovements(@RequestParam Long id) {
-        try {
-            MovementMoney movementMoney = movementService.getMovements(id);
-            return new ResponseEntity<>(movementMoney, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
-    @PostMapping("/movement")
+    @PostMapping("/enterprises/movement")
     public ResponseEntity<Response> postMovement(@RequestBody MovementMoney movementMoney) {
         return new ResponseEntity<>(
-                new Response("Empresa creada exitosamente",
+                new Response("Movimiento agregado exitosamente",
                         movementService.saveMovement(movementMoney)),
                 HttpStatus.OK);
     }
 
-    @PutMapping("/movement")
-    public ResponseEntity<Response> putMovement(@RequestBody MovementMoney movementMoney) {
-        return new ResponseEntity<>(
-                new Response("Empresa Actualizada Exitosamente",
-                        movementService.putMovement(movementMoney))
-                ,HttpStatus.OK);
-    }
 
-    @PatchMapping("/movement")
-    public ResponseEntity<Response> patchMovement(@RequestBody MovementMoney movementMoney) {
+    @PatchMapping("/enterprises/{id}/movements")
+    public ResponseEntity<Response> patchMovement(@RequestBody MovementMoney movementMoney, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
-                    new Response("Actualización Exitosa", movementService.patchMovement(movementMoney)),
+                    new Response("Actualización Exitosa", movementService.patchMovement(movementMoney, id)),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(
@@ -77,7 +51,7 @@ public class MovementController {
         }
     }
 
-    @DeleteMapping("movement/{id}")
+    @DeleteMapping("enterprises/{id}/movements")
     public ResponseEntity<Response> deleteMovement(@PathVariable Long id) {
         return new ResponseEntity<>(
                 new Response(movementService.deleteMovement(id), null),

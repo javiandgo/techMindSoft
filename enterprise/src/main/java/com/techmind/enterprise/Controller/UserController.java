@@ -65,11 +65,11 @@ public class UserController {
                 ,HttpStatus.OK);
     }
 
-    @PatchMapping("/user")
-    public ResponseEntity<Response> patchEmployee(@RequestBody Employee employee) {
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<Response> patchEmployee(@RequestBody Employee employee, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
-                    new Response("Actualización Exitosa", userService.patchEmployee(employee)),
+                    new Response("Actualización Exitosa", userService.patchEmployee(employee, id)),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(
@@ -78,7 +78,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<Response> deleteEmployee(@PathVariable Long id) {
         return new ResponseEntity<>(
                 new Response(userService.deleteEmployee(id), null),

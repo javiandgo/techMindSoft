@@ -35,9 +35,9 @@ public class UserService {
         return userRepository.save(employee_param);
     }
 
-    public Employee patchEmployee(Employee employee_param) throws Exception {
+    public Employee patchEmployee(Employee employee_param, Long id) throws Exception {
         try {
-            Employee employeeBD = getEmployee(employee_param.getId());
+            Employee employeeBD = getEmployee(id);
 
             if(employee_param.getName() != null) {
                 employeeBD.setName(employee_param.getName());

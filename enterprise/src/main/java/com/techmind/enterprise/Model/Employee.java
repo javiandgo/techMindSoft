@@ -1,5 +1,7 @@
 package com.techmind.enterprise.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,16 +19,29 @@ public class Employee {
     private String enterpriseEmployee;
     @Column(name = "rolEmployee")
     private String rolEmployee;
+    @JsonIgnore
+    @OneToOne (mappedBy = "employee")
+    private Profile profile;
 
-    public Employee(long id, String name, String email, String enterpriseEmployee, String rolEmployee) {
+    public Employee(long id, String name, String email, String enterpriseEmployee, String rolEmployee, Profile profile) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.enterpriseEmployee = enterpriseEmployee;
         this.rolEmployee = rolEmployee;
+        this.profile = profile;
+
     }
 
     public Employee() {
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public long getId() {
