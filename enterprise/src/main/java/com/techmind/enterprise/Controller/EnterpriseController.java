@@ -1,6 +1,5 @@
 package com.techmind.enterprise.Controller;
 
-import com.techmind.enterprise.Model.Employee;
 import com.techmind.enterprise.Model.Enterprise;
 import com.techmind.enterprise.Model.Response;
 import com.techmind.enterprise.Services.EnterpriseService;
@@ -48,7 +47,7 @@ public class EnterpriseController {
         }
     }
 
-    @PostMapping("/enterprise")
+    @PostMapping("/enterprises")
     public ResponseEntity<Response> postEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
                 new Response("Empresa creada exitosamente",
@@ -64,11 +63,11 @@ public class EnterpriseController {
                 ,HttpStatus.OK);
     }
 
-    @PatchMapping("/enterprise")
-    public ResponseEntity<Response> patchEnterprise(@RequestBody Enterprise enterprise) {
+    @PatchMapping("/enterprise/{id}")
+    public ResponseEntity<Response> patchEnterprise(@RequestBody Enterprise enterprise, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
-                    new Response("Actualización Exitosa", enterpriseService.patchEnterprise(enterprise)),
+                    new Response("Actualización Exitosa", enterpriseService.patchEnterprise(enterprise, id)),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(

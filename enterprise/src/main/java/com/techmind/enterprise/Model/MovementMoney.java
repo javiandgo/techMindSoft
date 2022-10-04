@@ -16,13 +16,18 @@ public class MovementMoney {
     @Column(name = "userOwner")
     private String userOwner;
 
-    public MovementMoney(Double amountMovement, String detailMovement, String userOwner) {
+    public MovementMoney(Long id, Double amountMovement, String detailMovement, String userOwner) {
+        this.id = id;
         this.amountMovement = amountMovement;
         this.detailMovement = detailMovement;
         this.userOwner = userOwner;
     }
 
     public MovementMoney() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public Double getAmountMovement() {

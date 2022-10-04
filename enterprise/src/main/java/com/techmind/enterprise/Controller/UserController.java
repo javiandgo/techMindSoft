@@ -19,8 +19,8 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<Employee>> getEmployees(){
 
-        return new ResponseEntity<List<Employee>>(
-                userService.getEmployee(),
+        return new ResponseEntity<>(
+                userService.getEmployees(),
                 HttpStatus.OK
                 );
     }
@@ -49,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping("/users")
     public ResponseEntity<Response> postEmployee(@RequestBody Employee employee) {
         return new ResponseEntity<>(
                 new Response("Empleado creado exitosamente",

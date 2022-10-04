@@ -1,5 +1,6 @@
 package com.techmind.enterprise.Services;
 
+import com.techmind.enterprise.Model.Enterprise;
 import com.techmind.enterprise.Model.MovementMoney;
 import com.techmind.enterprise.Repository.MovementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,11 @@ public class MovementService {
     @Autowired
     private MovementRepository movementRepository;
 
-    public List<MovementMoney> getMovement() {
+    public List<MovementMoney> getMovements() {
         return movementRepository.findAll();
     }
 
-    public MovementMoney getMovement(Long id) throws Exception {
+    public MovementMoney getMovements(Long id) throws Exception {
         Optional<MovementMoney> movementOptional = movementRepository.findById(id);
         if (movementOptional.isPresent()) {
             return movementOptional.get();
@@ -34,6 +35,34 @@ public class MovementService {
 
     public MovementMoney putMovement(MovementMoney movement_param) {
         return movementRepository.save(movement_param);
+    }
+
+    public MovementMoney patchMovement(MovementMoney movement_param) throws Exception {
+        try {
+            MovementMoney movementBD = getMovements(movement_param.getId());
+
+            if(movement_param.getAmountMovement() != null) {
+                movementBD.setAmountMovement(movement_param.getAmountMovement());
+            }
+
+            if (movement_param.getDetailMovement() != null) {
+                movementBD.setDetailMovement(movement_param.getDetailMovement());
+            }
+
+            if (movement_param.getUserOwner() != null){
+                movementBD.setUserOwner(movement_param.getUserOwner());
+            }
+
+            return saveMovement(movementBD);
+
+        } catch (Exception e) {
+            throw new Exception("Movimiento no se actualizo, porque no existe");
+        }
+    }
+
+    public String deleteMovement(Long id) {
+        movementRepository.deleteById(id);
+        return "Movimiento Eliminado Exitosamente";
     }
 
 }

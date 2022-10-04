@@ -36,9 +36,9 @@ public class EnterpriseService {
         return enterpriseRepository.save(enterprise_param);
     }
 
-    public Enterprise patchEnterprise(Enterprise enterprise_param) throws Exception {
+    public Enterprise patchEnterprise(Enterprise enterprise_param, Long id) throws Exception {
         try {
-            Enterprise enterpriseBD = getEnterprise(enterprise_param.getId());
+            Enterprise enterpriseBD = getEnterprise(id);
 
             if(enterprise_param.getName() != null) {
                 enterpriseBD.setName(enterprise_param.getName());
