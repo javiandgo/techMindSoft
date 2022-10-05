@@ -1,9 +1,13 @@
 package com.techmind.enterprise.Model;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "movements")
+@Table(name = "transaction")
 public class MovementMoney {
 
     @Id
@@ -12,14 +16,25 @@ public class MovementMoney {
     private Double amountMovement;
     @Column(name = "detailMovement")
     private String detailMovement;
-    @Column(name = "userOwner")
-    private String userOwner;
+    @ManyToOne
+    private Enterprise enterprise;
+    @ManyToOne
+    private Employee employee;
+    @Column(name = "createAt")
+    @CreatedDate
+    private Date createAt;
+    @Column(name = "updateAt")
+    @LastModifiedDate
+    private Date updateAt;
 
-    public MovementMoney(Long id, Double amountMovement, String detailMovement, String userOwner) {
+    public MovementMoney(long id, Double amountMovement, String detailMovement, Enterprise enterprise, Employee employee, Date createAt, Date updateAt) {
         this.id = id;
         this.amountMovement = amountMovement;
         this.detailMovement = detailMovement;
-        this.userOwner = userOwner;
+        this.enterprise = enterprise;
+        this.employee = employee;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
     public MovementMoney() {
@@ -27,6 +42,10 @@ public class MovementMoney {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Double getAmountMovement() {
@@ -45,11 +64,35 @@ public class MovementMoney {
         this.detailMovement = detailMovement;
     }
 
-    public String getUserOwner() {
-        return userOwner;
+    public Enterprise getEnterprise() {
+        return enterprise;
     }
 
-    public void setUserOwner(String userOwner) {
-        this.userOwner = userOwner;
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
     }
 }

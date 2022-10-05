@@ -1,6 +1,12 @@
 package com.techmind.enterprise.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "enterprise")
@@ -16,17 +22,43 @@ public class Enterprise {
     private String address;
     @Column(name = "phone")
     private int phone;
-    @Column(name = "nit")
-    private String nit;
+    @Column(name = "document")
+    private String document;
 
-    public Enterprise(String name, String address, int phone, String nit) {
+    @Column(name = "createAt")
+    @CreatedDate
+    private Date createAt;
+    @Column(name = "updateAt")
+    @LastModifiedDate
+    private Date updateAt;
+    @JsonIgnore
+    @OneToMany(mappedBy = "enterprise")
+    private List<Employee> employee;
+    @JsonIgnore
+    @OneToMany(mappedBy = "enterprise")
+    private List<MovementMoney> movementMoney;
+
+    public Enterprise(long id, String name, String address, int phone, String document, Date createAt, Date updateAt, List<Employee> employee, List<MovementMoney> movementMoney) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.nit = nit;
+        this.document = document;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.employee = employee;
+        this.movementMoney = movementMoney;
     }
 
     public Enterprise() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -53,11 +85,43 @@ public class Enterprise {
         this.phone = phone;
     }
 
-    public String getNit() {
-        return nit;
+    public String getDocument() {
+        return document;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(List<Employee> employee) {
+        this.employee = employee;
+    }
+
+    public List<MovementMoney> getMovementMoney() {
+        return movementMoney;
+    }
+
+    public void setMovementMoney(List<MovementMoney> movementMoney) {
+        this.movementMoney = movementMoney;
     }
 }

@@ -49,10 +49,6 @@ public class MovementService {
                 movementBD.setDetailMovement(movement_param.getDetailMovement());
             }
 
-            if (movement_param.getUserOwner() != null){
-                movementBD.setUserOwner(movement_param.getUserOwner());
-            }
-
             return saveMovement(movementBD);
 
         } catch (Exception e) {

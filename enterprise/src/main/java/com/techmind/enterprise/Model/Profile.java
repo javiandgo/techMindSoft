@@ -12,10 +12,17 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
     @Column(name = "image")
     private String image;
     @Column(name = "phone")
     private String phone;
+
     @OneToOne
     private Employee employee;
     @Column(name = "createAt")
@@ -25,8 +32,10 @@ public class Profile {
     @LastModifiedDate
     private Date updateAt;
 
-    public Profile(String id, String image, String phone, Employee employee, Date createAt, Date updateAt) {
+    public Profile(String id, String username, String password, String image, String phone, Employee employee, Date createAt, Date updateAt) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.image = image;
         this.phone = phone;
         this.employee = employee;
@@ -43,6 +52,22 @@ public class Profile {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getImage() {

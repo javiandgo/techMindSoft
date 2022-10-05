@@ -52,8 +52,8 @@ public class EnterpriseService {
                 enterpriseBD.setPhone(enterprise_param.getPhone());
             }
 
-            if (enterprise_param.getNit() != null) {
-                enterpriseBD.setNit(enterprise_param.getNit());
+            if (enterprise_param.getDocument() != null) {
+                enterpriseBD.setDocument(enterprise_param.getDocument());
             }
 
             return saveEnterprise(enterpriseBD);

@@ -1,8 +1,12 @@
 package com.techmind.enterprise.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -15,33 +19,39 @@ public class Employee {
     private String name;
     @Column(name = "email")
     private String email;
-    @Column(name = "enterpriseEmployee")
-    private String enterpriseEmployee;
-    @Column(name = "rolEmployee")
-    private String rolEmployee;
     @JsonIgnore
     @OneToOne (mappedBy = "employee")
     private Profile profile;
+    @Column(name = "roleName")
+    private String roleName;
 
-    public Employee(long id, String name, String email, String enterpriseEmployee, String rolEmployee, Profile profile) {
+    @Column(name = "createAt")
+    @CreatedDate
+    private Date createAt;
+    @Column(name = "updateAt")
+    @LastModifiedDate
+    private Date updateAt;
+
+
+    @ManyToOne
+    private Enterprise enterprise;
+
+    @OneToMany(mappedBy = "employee")
+    private List<MovementMoney> movementMoney;
+
+    public Employee(long id, String name, String email, Profile profile, String roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.enterpriseEmployee = enterpriseEmployee;
-        this.rolEmployee = rolEmployee;
         this.profile = profile;
-
+        this.roleName = roleName;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.enterprise = enterprise;
+        this.movementMoney = movementMoney;
     }
 
     public Employee() {
-    }
-
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
     }
 
     public long getId() {
@@ -68,19 +78,51 @@ public class Employee {
         this.email = email;
     }
 
-    public String getEnterpriseEmployee() {
-        return enterpriseEmployee;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setEnterpriseEmployee(String enterpriseEmployee) {
-        this.enterpriseEmployee = enterpriseEmployee;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    public String getRolEmployee() {
-        return rolEmployee;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolEmployee(String rolEmployee) {
-        this.rolEmployee = rolEmployee;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public List<MovementMoney> getMovementMoney() {
+        return movementMoney;
+    }
+
+    public void setMovementMoney(List<MovementMoney> movementMoney) {
+        this.movementMoney = movementMoney;
     }
 }

@@ -47,12 +47,9 @@ public class UserService {
                 employeeBD.setEmail(employee_param.getEmail());
             }
 
-            if (employee_param.getEnterpriseEmployee() != null) {
-                employeeBD.setEnterpriseEmployee(employee_param.getEnterpriseEmployee());
-            }
 
-            if (employee_param.getRolEmployee() != null) {
-                employeeBD.setRolEmployee(employee_param.getRolEmployee());
+            if (employee_param.getRoleName()!= null) {
+                employeeBD.setRoleName(employee_param.getRoleName());
             }
 
             return saveEmployee(employeeBD);
