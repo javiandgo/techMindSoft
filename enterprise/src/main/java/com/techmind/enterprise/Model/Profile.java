@@ -1,5 +1,6 @@
 package com.techmind.enterprise.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -22,8 +23,8 @@ public class Profile {
     private String image;
     @Column(name = "phone")
     private String phone;
-
-    @OneToOne
+    @JsonIgnore
+    @OneToOne(mappedBy = "profile")
     private Employee employee;
     @Column(name = "createAt")
     @CreatedDate

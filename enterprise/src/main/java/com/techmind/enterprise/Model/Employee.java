@@ -19,8 +19,8 @@ public class Employee {
     private String name;
     @Column(name = "email")
     private String email;
-    @JsonIgnore
-    @OneToOne (mappedBy = "employee")
+
+    @OneToOne
     private Profile profile;
     @Column(name = "roleName")
     private String roleName;
