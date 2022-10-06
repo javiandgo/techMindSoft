@@ -27,7 +27,6 @@ public class Profile {
 
     @JsonIgnore
     @OneToOne(mappedBy = "profile")
-    @JoinColumn(name = "profile_id", nullable = false)
     private Employee employee;
     @CreatedDate
     @Column(name = "createAt")

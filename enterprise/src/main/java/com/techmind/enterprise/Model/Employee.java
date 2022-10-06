@@ -23,6 +23,7 @@ public class Employee {
     private String email;
 
     @OneToOne
+    @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
     @Column(name = "roleName")
     private String roleName;
