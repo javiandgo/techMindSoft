@@ -3,6 +3,7 @@ package com.techmind.enterprise.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "enterprise")
+@EntityListeners(AuditingEntityListener.class)
 public class Enterprise {
 
     @Id
@@ -24,13 +26,12 @@ public class Enterprise {
     private int phone;
     @Column(name = "document")
     private String document;
-
-    @Column(name = "createAt")
     @CreatedDate
-    private Date createAt;
-    @Column(name = "updateAt")
+    @Column(name = "createAt")
+    private Date createAt = new Date();
     @LastModifiedDate
-    private Date updateAt;
+    @Column(name = "updateAt")
+    private Date updateAt = new Date();
     @JsonIgnore
     @OneToMany(mappedBy = "enterprise")
     private List<Employee> employee;

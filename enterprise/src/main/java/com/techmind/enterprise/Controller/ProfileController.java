@@ -19,7 +19,7 @@ public class ProfileController {
     public ResponseEntity<List<Profile>> getProfiles() {
 
         return new ResponseEntity<List<Profile>>(
-                profileService.getProfiles(),
+                profileService.getProfile(),
                 HttpStatus.OK
         );
     }
@@ -50,7 +50,7 @@ public class ProfileController {
     @PostMapping("/profiles")
     public ResponseEntity<Response> postProfile(@RequestBody Profile profile) {
         return new ResponseEntity<>(
-                new Response("Empresa creada exitosamente",
+                new Response("Perfil creada exitosamente",
                 profileService.saveProfile(profile)),
                 HttpStatus.OK);
     }

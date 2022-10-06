@@ -3,6 +3,7 @@ package com.techmind.enterprise.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,10 +11,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "employee")
+@EntityListeners(AuditingEntityListener.class)
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "name")
     private String name;
@@ -24,18 +26,15 @@ public class Employee {
     private Profile profile;
     @Column(name = "roleName")
     private String roleName;
-
-    @Column(name = "createAt")
     @CreatedDate
-    private Date createAt;
-    @Column(name = "updateAt")
+    @Column(name = "createAt")
+    private Date createAt = new Date();
     @LastModifiedDate
-    private Date updateAt;
-
-
+    @Column(name = "updateAt")
+    private Date updateAt = new Date();
     @ManyToOne
+    @JoinColumn(name = "enterprise_id", nullable = false)
     private Enterprise enterprise;
-
     @OneToMany(mappedBy = "employee")
     private List<MovementMoney> movementMoney;
 

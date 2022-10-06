@@ -2,29 +2,34 @@ package com.techmind.enterprise.Model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "transaction")
+@EntityListeners(AuditingEntityListener.class)
 public class MovementMoney {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "amountMovement")
     private Double amountMovement;
     @Column(name = "detailMovement")
     private String detailMovement;
     @ManyToOne
+    @JoinColumn(name="enterprise_id", nullable = false)
     private Enterprise enterprise;
     @ManyToOne
+    @JoinColumn(name="employee_id", nullable = false)
     private Employee employee;
-    @Column(name = "createAt")
     @CreatedDate
+    @Column(name = "createAt")
     private Date createAt;
-    @Column(name = "updateAt")
     @LastModifiedDate
+    @Column(name = "updateAt")
     private Date updateAt;
 
     public MovementMoney(long id, Double amountMovement, String detailMovement, Enterprise enterprise, Employee employee, Date createAt, Date updateAt) {

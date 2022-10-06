@@ -3,17 +3,18 @@ package com.techmind.enterprise.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 @Entity
 @Table (name = "profile")
+@EntityListeners(AuditingEntityListener.class)
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
-
     @Column(name = "username")
     private String username;
 
@@ -23,15 +24,17 @@ public class Profile {
     private String image;
     @Column(name = "phone")
     private String phone;
+
     @JsonIgnore
     @OneToOne(mappedBy = "profile")
+    @JoinColumn(name = "profile_id", nullable = false)
     private Employee employee;
-    @Column(name = "createAt")
     @CreatedDate
-    private Date createAt;
-    @Column(name = "updateAt")
+    @Column(name = "createAt")
+    private Date createAt = new Date();
     @LastModifiedDate
-    private Date updateAt;
+    @Column(name = "updateAt")
+    private Date updateAt = new Date();
 
     public Profile(String id, String username, String password, String image, String phone, Employee employee, Date createAt, Date updateAt) {
         this.id = id;
