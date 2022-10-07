@@ -16,8 +16,7 @@ public class Enterprise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "address")
@@ -39,7 +38,7 @@ public class Enterprise {
     @OneToMany(mappedBy = "enterprise")
     private List<MovementMoney> movementMoney;
 
-    public Enterprise(long id, String name, String address, int phone, String document, Date createAt, Date updateAt, List<Employee> employee, List<MovementMoney> movementMoney) {
+    public Enterprise(Long id, String name, String address, int phone, String document, Date createAt, Date updateAt, List<Employee> employee, List<MovementMoney> movementMoney) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -54,11 +53,11 @@ public class Enterprise {
     public Enterprise() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

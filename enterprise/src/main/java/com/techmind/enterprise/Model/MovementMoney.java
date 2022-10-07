@@ -13,26 +13,24 @@ import java.util.Date;
 public class MovementMoney {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Column(name = "amountMovement")
     private Double amountMovement;
     @Column(name = "detailMovement")
     private String detailMovement;
-    @ManyToOne
-    @JoinColumn(name="enterprise_id", nullable = false)
-    private Enterprise enterprise;
-    @ManyToOne
-    @JoinColumn(name="employee_id", nullable = false)
-    private Employee employee;
     @CreatedDate
     @Column(name = "createAt")
-    private Date createAt;
+    private Date createAt = new Date();
     @LastModifiedDate
     @Column(name = "updateAt")
-    private Date updateAt;
+    private Date updateAt = new Date();
+    @ManyToOne
+    private Enterprise enterprise;
+    @ManyToOne
+    private Employee employee;
 
-    public MovementMoney(long id, Double amountMovement, String detailMovement, Enterprise enterprise, Employee employee, Date createAt, Date updateAt) {
+    public MovementMoney(Long id, Double amountMovement, String detailMovement, Enterprise enterprise, Employee employee, Date createAt, Date updateAt) {
         this.id = id;
         this.amountMovement = amountMovement;
         this.detailMovement = detailMovement;
@@ -45,11 +43,11 @@ public class MovementMoney {
     public MovementMoney() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

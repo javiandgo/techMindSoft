@@ -52,6 +52,14 @@ public class UserService {
                 employeeBD.setRoleName(employee_param.getRoleName());
             }
 
+            if (employee_param.getProfile() != null) {
+                employeeBD.setProfile(employee_param.getProfile());
+            }
+
+            if (employee_param.getEnterprise() != null) {
+                employeeBD.setEnterprise(employee_param.getEnterprise());
+            }
+
             return saveEmployee(employeeBD);
 
         } catch (Exception e) {

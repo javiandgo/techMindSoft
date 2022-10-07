@@ -1,14 +1,16 @@
 package com.techmind.enterprise.Services;
 
-import com.techmind.enterprise.Model.Enterprise;
 import com.techmind.enterprise.Model.MovementMoney;
 import com.techmind.enterprise.Repository.MovementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 public class MovementService {
@@ -20,7 +22,7 @@ public class MovementService {
         return movementRepository.findAll();
     }
 
-    public MovementMoney getMovements(Long id) throws Exception {
+    public MovementMoney getMovement(Long id) throws Exception {
         Optional<MovementMoney> movementOptional = movementRepository.findById(id);
         if (movementOptional.isPresent()) {
             return movementOptional.get();
@@ -29,17 +31,22 @@ public class MovementService {
         }
     }
 
+    public MovementMoney getMovementMoneyByEnterpriseId(Long idEnterprise){
+        return movementRepository.findByEnterpriseId(idEnterprise);
+    }
+
     public MovementMoney saveMovement(MovementMoney movement_param) {
         return movementRepository.save(movement_param);
     }
 
     public MovementMoney putMovement(MovementMoney movement_param) {
+
         return movementRepository.save(movement_param);
     }
 
     public MovementMoney patchMovement(MovementMoney movement_param, Long id) throws Exception {
         try {
-            MovementMoney movementBD = getMovements(id);
+            MovementMoney movementBD = getMovement(id);
 
             if(movement_param.getAmountMovement() != null) {
                 movementBD.setAmountMovement(movement_param.getAmountMovement());
@@ -48,6 +55,20 @@ public class MovementService {
             if (movement_param.getDetailMovement() != null) {
                 movementBD.setDetailMovement(movement_param.getDetailMovement());
             }
+
+            if (movement_param.getEnterprise() != null) {
+                movementBD.setEnterprise(movement_param.getEnterprise());
+            }
+
+            if (movement_param.getEmployee() != null) {
+                movementBD.setEmployee(movement_param.getEmployee());
+            }
+
+            if (movement_param.getCreateAt() == null) {
+                movementBD.setCreateAt(new Date());
+            }
+
+            movementBD.setUpdateAt(new Date());
 
             return saveMovement(movementBD);
 

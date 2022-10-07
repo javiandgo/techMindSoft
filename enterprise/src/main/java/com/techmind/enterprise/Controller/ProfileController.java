@@ -19,7 +19,7 @@ public class ProfileController {
     public ResponseEntity<List<Profile>> getProfiles() {
 
         return new ResponseEntity<List<Profile>>(
-                profileService.getProfile(),
+                profileService.getProfiles(),
                 HttpStatus.OK
         );
     }

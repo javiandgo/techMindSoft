@@ -16,15 +16,11 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "email")
     private String email;
-
-    @OneToOne
-    @JoinColumn(name = "profile_id", nullable = false)
-    private Profile profile;
     @Column(name = "roleName")
     private String roleName;
     @CreatedDate
@@ -34,31 +30,34 @@ public class Employee {
     @Column(name = "updateAt")
     private Date updateAt = new Date();
     @ManyToOne
-    @JoinColumn(name = "enterprise_id", nullable = false)
+    @JoinColumn(name = "enterprise_id", nullable = true)
     private Enterprise enterprise;
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<MovementMoney> movementMoney;
+    @OneToOne
+    private Profile profile;
 
-    public Employee(long id, String name, String email, Profile profile, String roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney) {
+    public Employee(Long id, String name, String email, String roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney, Profile profile) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.profile = profile;
         this.roleName = roleName;
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.enterprise = enterprise;
         this.movementMoney = movementMoney;
+        this.profile = profile;
     }
 
     public Employee() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -76,14 +75,6 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Profile getProfile() {
-        return profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
     }
 
     public String getRoleName() {
@@ -124,5 +115,13 @@ public class Employee {
 
     public void setMovementMoney(List<MovementMoney> movementMoney) {
         this.movementMoney = movementMoney;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

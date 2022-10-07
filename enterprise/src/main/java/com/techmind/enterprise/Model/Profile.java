@@ -14,46 +14,44 @@ public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     @Column(name = "username")
     private String username;
-
     @Column(name = "password")
     private String password;
     @Column(name = "image")
     private String image;
     @Column(name = "phone")
     private String phone;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "profile")
-    private Employee employee;
     @CreatedDate
     @Column(name = "createAt")
     private Date createAt = new Date();
     @LastModifiedDate
     @Column(name = "updateAt")
     private Date updateAt = new Date();
+    @JsonIgnore
+    @OneToOne(mappedBy = "profile")
+    private Employee employee;
 
-    public Profile(String id, String username, String password, String image, String phone, Employee employee, Date createAt, Date updateAt) {
+    public Profile(Long id, String username, String password, String image, String phone, Date createAt, Date updateAt, Employee employee) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.image = image;
         this.phone = phone;
-        this.employee = employee;
         this.createAt = createAt;
         this.updateAt = updateAt;
+        this.employee = employee;
     }
 
     public Profile() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -89,14 +87,6 @@ public class Profile {
         this.phone = phone;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public Date getCreateAt() {
         return createAt;
     }
@@ -111,5 +101,13 @@ public class Profile {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

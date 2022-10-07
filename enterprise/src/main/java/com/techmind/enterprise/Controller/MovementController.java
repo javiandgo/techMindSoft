@@ -1,6 +1,5 @@
 package com.techmind.enterprise.Controller;
 
-import com.techmind.enterprise.Model.Enterprise;
 import com.techmind.enterprise.Model.MovementMoney;
 import com.techmind.enterprise.Model.Response;
 import com.techmind.enterprise.Services.MovementService;
@@ -16,16 +15,33 @@ public class MovementController {
     
     @Autowired
     private MovementService movementService;
+
+    @GetMapping("/movements")
+    public ResponseEntity<List<MovementMoney>> getMovements(){
+
+        return new ResponseEntity<>(
+                movementService.getMovements(),
+                HttpStatus.OK
+        );
+    }
     
-    @GetMapping("/enterprises/{id}/movements")
+    @GetMapping("/movement/{id}")
     public ResponseEntity<Object> getMovement(@PathVariable Long id) {
         try {
-            MovementMoney movementMoney = movementService.getMovements(id);
+            MovementMoney movementMoney = movementService.getMovement(id);
             return new ResponseEntity<>(movementMoney, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/enterprises/{id}/movements")
+    public ResponseEntity<MovementMoney> getIdEnterprise(@PathVariable Long id) {
+        return new ResponseEntity<>(
+                movementService.getMovementMoneyByEnterpriseId(id),
+                HttpStatus.OK
+        );
     }
 
 
@@ -38,7 +54,7 @@ public class MovementController {
     }
 
 
-    @PatchMapping("/enterprises/{id}/movements")
+    @PatchMapping("/movement/{id}")
     public ResponseEntity<Response> patchMovement(@RequestBody MovementMoney movementMoney, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
