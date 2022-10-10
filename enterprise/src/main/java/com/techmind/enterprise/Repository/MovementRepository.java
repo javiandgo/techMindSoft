@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovementRepository extends JpaRepository<MovementMoney, Long> {
 
-    public MovementMoney findByEnterpriseId(Long id);
+    public MovementMoney findByEnterpriseId(Long id );
 }
