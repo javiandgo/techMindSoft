@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <!-- Custom styles for this template -->
-    <link href="/static/signin.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
     <title>Login</title>
 
     <style>
@@ -64,16 +64,16 @@
 <body class="text-center">
 
 <main class="form-signin w-100 m-auto">
-    <form>
-        <img class="mb-4" src="/static/password.png" alt="password" width="64" height="64">
+    <form method="post" th:action="@{/login}" th:object="${formLogin}">
+        <img class="mb-4" src="password.png" alt="password" width="64" height="64">
         <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email</label>
+            <input th:field="*{username}" type="text" class="form-control" id="floatingInput" placeholder="Nombre de Usuario">
+            <label for="floatingInput">Usuario</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+            <input th:field="*{password}" type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
             <label for="floatingPassword">Contraseña</label>
         </div>
 

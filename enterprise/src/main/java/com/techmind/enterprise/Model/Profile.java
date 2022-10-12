@@ -110,4 +110,18 @@ public class Profile {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
+                ", phone='" + phone + '\'' +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", employee=" + employee +
+                '}';
+    }
 }
