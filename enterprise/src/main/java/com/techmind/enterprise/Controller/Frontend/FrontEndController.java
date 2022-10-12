@@ -11,4 +11,9 @@ public class FrontEndController {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String getLogin () {
+        return "login";
+    }
+
 }
