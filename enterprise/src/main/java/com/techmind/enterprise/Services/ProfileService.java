@@ -26,6 +26,10 @@ public class ProfileService {
             throw new Exception("Perfil No Existe");
         }
     }
+    public Profile getProfileUsername(String username) {
+        Profile profileOptional = profileRepository.findByUsername(username);
+        return profileOptional;
+    }
 
     public Profile saveProfile(Profile profile_param) {
         return profileRepository.save(profile_param);

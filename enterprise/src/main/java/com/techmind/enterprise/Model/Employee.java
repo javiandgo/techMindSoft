@@ -21,8 +21,9 @@ public class Employee {
     private String name;
     @Column(name = "email")
     private String email;
-    @Column(name = "roleName")
-    private String roleName;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = RoleName.class, fetch = FetchType.EAGER)
+    private List<RoleName> roleName;
     @CreatedDate
     @Column(name = "createAt")
     private Date createAt = new Date();
@@ -38,7 +39,7 @@ public class Employee {
     @OneToOne
     private Profile profile;
 
-    public Employee(Long id, String name, String email, String roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney, Profile profile) {
+    public Employee(Long id, String name, String email, List<RoleName> roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney, Profile profile) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -77,11 +78,11 @@ public class Employee {
         this.email = email;
     }
 
-    public String getRoleName() {
+    public List<RoleName> getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(List<RoleName> roleName) {
         this.roleName = roleName;
     }
 
@@ -124,4 +125,20 @@ public class Employee {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", roleName=" + roleName +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                ", enterprise=" + enterprise +
+                ", movementMoney=" + movementMoney +
+                ", profile=" + profile +
+                '}';
+    }
 }
+
