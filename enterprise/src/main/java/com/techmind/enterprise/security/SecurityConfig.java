@@ -36,12 +36,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/movements").hasAnyRole("ADMIN", "OPERARIO")
                 .antMatchers("/").permitAll()
                 .antMatchers("/login*").permitAll()
+
                 .and()
+
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/dashboard");
+                .defaultSuccessUrl("/dashboard")
+
+                .and()
+
+                .oauth2Login();
 
     }
 

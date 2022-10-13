@@ -17,13 +17,9 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println(username);
-
         Profile profile = null;
-
         try {
              profile = (Profile) profileService.getProfileUsername(username);
-             System.out.println(username);
         } catch (Exception e) {
             e.printStackTrace();
             throw new UsernameNotFoundException(e.getMessage());
