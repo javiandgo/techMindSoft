@@ -1,6 +1,7 @@
 package com.techmind.enterprise.Services;
 
 import com.techmind.enterprise.Model.Employee;
+import com.techmind.enterprise.Model.Profile;
 import com.techmind.enterprise.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class UserService {
         }else {
             throw new Exception("Empleado No Existe");
         }
+    }
+
+    public Employee getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public Employee saveEmployee(Employee employee_param) {

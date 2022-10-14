@@ -2,6 +2,7 @@ package com.techmind.enterprise.Controller.Frontend;
 
 import com.techmind.enterprise.Model.Profile;
 import com.techmind.enterprise.Services.ProfileService;
+import com.techmind.enterprise.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,9 @@ public class FrontEndController {
 
     @Autowired
     ProfileService profileService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/")
     public String getIndex() {
@@ -41,7 +45,13 @@ public class FrontEndController {
 
     @GetMapping("/dashboard")
     public String getDashboard (Model model) {
-        model.addAttribute("profiles", profileService.getProfiles());
+        model.addAttribute("usuarios", userService.getEmployees());
+        return "dashboard";
+    }
+
+    @GetMapping("/users")
+    public String getUsers (Model model) {
+        model.addAttribute("usuarios", userService.getEmployees());
         return "dashboard";
     }
 }

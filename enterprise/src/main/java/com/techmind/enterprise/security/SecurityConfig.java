@@ -19,6 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
+    @Autowired
+    SuccessGoogle successGoogle;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -30,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+            http.authorizeRequests()
                 .antMatchers("/user").hasRole("ADMIN")
                 .antMatchers("/enterprise").hasRole("ADMIN")
                 .antMatchers("/movements").hasAnyRole("ADMIN", "OPERARIO")
@@ -47,7 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
 
-                .oauth2Login();
+                .oauth2Login()
+                .loginPage("/login")
+                .successHandler(successGoogle)
+                .defaultSuccessUrl("/dashboard");
 
     }
 
