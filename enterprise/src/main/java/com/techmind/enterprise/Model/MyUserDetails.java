@@ -14,12 +14,12 @@ public class MyUserDetails implements UserDetails {
     private String username;
     private List<GrantedAuthority> authorities;
 
-    public MyUserDetails(Profile profile) {
-        this.password = profile.getPassword();
-        this.username = profile.getUsername();
+    public MyUserDetails(Employee employee) {
+        this.password = employee.getProfile().getPassword();
+        this.username = employee.getProfile().getUsername();
         this.authorities = new ArrayList<>();
 
-        for (RoleName roleName: profile.getEmployee().getRoleName()) {
+        for (RoleName roleName: employee.getRoleName()) {
             this.authorities.add(new SimpleGrantedAuthority(roleName.name()));
         }
     }

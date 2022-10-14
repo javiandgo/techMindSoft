@@ -17,14 +17,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    MyUserDetailService myUserDetailService;
 
     @Autowired
     SuccessGoogle successGoogle;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(myUserDetailService);
     }
 
     @Bean
@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("/user").hasRole("ADMIN")
-                    .antMatchers("/enterprise").hasRole("ADMIN")
+                    .antMatchers("/user").hasAnyRole("ADMIN")
+                    .antMatchers("/enterprises").hasAnyRole("ADMIN")
                     .antMatchers("/movements").hasAnyRole("ADMIN", "OPERARIO")
                     .antMatchers("/").permitAll()
                     .antMatchers("/login*").permitAll()

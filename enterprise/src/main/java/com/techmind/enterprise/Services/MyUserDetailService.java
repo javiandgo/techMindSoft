@@ -24,6 +24,6 @@ public class MyUserDetailService implements UserDetailsService {
             e.printStackTrace();
             throw new UsernameNotFoundException(e.getMessage());
         }
-        return new MyUserDetails(profile);
+        return new MyUserDetails(profile.getEmployee());
     }
 }
