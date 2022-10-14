@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/userlist")
     public ResponseEntity<List<Employee>> getEmployees(){
 
         return new ResponseEntity<>(
@@ -78,11 +78,11 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/user/{id}")
+    /* @DeleteMapping("/user/{id}")
     public ResponseEntity<Response> deleteEmployee(@PathVariable Long id) {
         return new ResponseEntity<>(
                 new Response(userService.deleteEmployee(id), null),
                 HttpStatus.OK
         );
-    }
+    }*/
 }

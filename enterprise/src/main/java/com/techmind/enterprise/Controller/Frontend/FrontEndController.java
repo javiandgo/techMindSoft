@@ -21,7 +21,7 @@ public class FrontEndController {
 
     @GetMapping("/")
     public String getIndex() {
-        return "index";
+        return "dashboard";
     }
 
 
@@ -52,6 +52,6 @@ public class FrontEndController {
     @GetMapping("/users")
     public String getUsers (Model model) {
         model.addAttribute("usuarios", userService.getEmployees());
-        return "dashboard";
+        return "users";
     }
 }

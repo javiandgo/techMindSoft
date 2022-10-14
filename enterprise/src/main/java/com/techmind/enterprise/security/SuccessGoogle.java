@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
@@ -22,6 +23,7 @@ public class SuccessGoogle implements AuthenticationSuccessHandler {
     @Autowired
     UserService userService;
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         DefaultOidcUser user = (DefaultOidcUser) authentication.getPrincipal();
@@ -33,12 +35,10 @@ public class SuccessGoogle implements AuthenticationSuccessHandler {
             response.sendRedirect("/dashboard");
         } catch (Exception e) {
             // Salida en google
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
 
-
-
-
-    }
+}
 
 
 }

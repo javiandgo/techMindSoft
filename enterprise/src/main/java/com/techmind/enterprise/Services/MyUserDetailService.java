@@ -19,7 +19,7 @@ public class MyUserDetailService implements UserDetailsService {
 
         Profile profile = null;
         try {
-             profile = (Profile) profileService.getProfileUsername(username);
+             profile = profileService.getProfileUsername(username);
         } catch (Exception e) {
             e.printStackTrace();
             throw new UsernameNotFoundException(e.getMessage());

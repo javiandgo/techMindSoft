@@ -27,8 +27,8 @@ public class ProfileService {
         }
     }
     public Profile getProfileUsername(String username) {
-        Profile profileOptional = profileRepository.findByUsername(username);
-        return profileOptional;
+        Profile profile = profileRepository.findByUsername(username);
+        return profile;
     }
 
     public Profile saveProfile(Profile profile_param) {

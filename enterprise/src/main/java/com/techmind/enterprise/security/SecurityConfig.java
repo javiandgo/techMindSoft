@@ -34,26 +34,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                .antMatchers("/user").hasRole("ADMIN")
-                .antMatchers("/enterprise").hasRole("ADMIN")
-                .antMatchers("/movements").hasAnyRole("ADMIN", "OPERARIO")
-                .antMatchers("/").permitAll()
-                .antMatchers("/login*").permitAll()
+                    .antMatchers("/user").hasRole("ADMIN")
+                    .antMatchers("/enterprise").hasRole("ADMIN")
+                    .antMatchers("/movements").hasAnyRole("ADMIN", "OPERARIO")
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/login*").permitAll()
 
-                .and()
+                    .and()
 
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/dashboard")
+                    .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/dashboard")
 
-                .and()
+                    .and()
 
-                .oauth2Login()
-                .loginPage("/login")
-                .successHandler(successGoogle)
-                .defaultSuccessUrl("/dashboard");
+                    .oauth2Login()
+                    .loginPage("/login")
+                    .successHandler(successGoogle)
+
+                    .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login");
 
     }
 
