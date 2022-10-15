@@ -19,7 +19,7 @@ public class EnterpriseController {
     public ResponseEntity<List<Enterprise>> getEnterprises() {
 
         return new ResponseEntity<List<Enterprise>>(
-                enterpriseService.getEnterprise(),
+                enterpriseService.getEnterprises(),
                 HttpStatus.OK
         );
     }

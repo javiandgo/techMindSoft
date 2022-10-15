@@ -1,6 +1,6 @@
 package com.techmind.enterprise.Model;
 
 public enum RoleName {
-    ADMIN,
-    OPERARIO
+    ROLE_ADMIN,
+    ROLE_OPERARIO
 }

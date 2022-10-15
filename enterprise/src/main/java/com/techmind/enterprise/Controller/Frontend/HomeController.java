@@ -53,12 +53,6 @@ public class HomeController {
         return "dashboard";
     }
 
-    @GetMapping("/users")
-    public String getUsers (Model model) {
-        model.addAttribute("usuarios", userService.getEmployees());
-        return "users";
-    }
-
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

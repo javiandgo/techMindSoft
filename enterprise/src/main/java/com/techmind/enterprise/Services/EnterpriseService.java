@@ -14,7 +14,7 @@ public class EnterpriseService {
     @Autowired
     private EnterpriseRepository enterpriseRepository;
 
-    public List<Enterprise> getEnterprise() {
+    public List<Enterprise> getEnterprises() {
         return enterpriseRepository.findAll();
     }
 

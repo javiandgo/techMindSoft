@@ -2,9 +2,9 @@
 <html lang="es" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
+    <link th:href="@{/signin.css}" rel="stylesheet">
     <title>Login</title>
 
     <style>
@@ -92,6 +92,6 @@
     </form>
 </main>
 
-<script src="bootstrap.bundle.min.js"></script>
+<script th:src="@{/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

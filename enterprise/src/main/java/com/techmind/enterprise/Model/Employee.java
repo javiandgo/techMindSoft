@@ -36,7 +36,7 @@ public class Employee {
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<MovementMoney> movementMoney;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
     public Employee(Long id, String name, String email, List<RoleName> roleName, Date createAt, Date updateAt, Enterprise enterprise, List<MovementMoney> movementMoney, Profile profile) {
