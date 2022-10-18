@@ -52,17 +52,16 @@ public class UserService {
                 employeeBD.setEmail(employee_param.getEmail());
             }
 
-
             if (employee_param.getRoleName()!= null) {
                 employeeBD.setRoleName(employee_param.getRoleName());
             }
 
-            if (employee_param.getProfile() != null) {
-                employeeBD.setProfile(employee_param.getProfile());
-            }
-
             if (employee_param.getEnterprise() != null) {
                 employeeBD.setEnterprise(employee_param.getEnterprise());
+            }
+
+            if (employee_param.getProfile() != null) {
+                employeeBD.setProfile(employee_param.getProfile());
             }
 
             return saveEmployee(employeeBD);

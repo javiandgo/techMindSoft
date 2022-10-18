@@ -10,4 +10,6 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     Profile findByUsername(String username);
+
+    Profile findByEmployee(Long id);
  }

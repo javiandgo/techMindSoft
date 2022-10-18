@@ -56,49 +56,49 @@
         </div>
       </nav>
       <div sec:authorize="hasRole('ADMIN')">
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <h1 class="pt-3 pb-2 border-bottom">Agregar un nuevo usuario</h1>
-        <form method="post" th:action="@{/users/add}" th:object="${formAddUser}" class="mb-5">
-          <div class="mb-3">
-            <label for="username" class="form-label">Nombre de Usuario</label>
-            <input type="text" class="form-control" id="username" th:field="*{profile.username}">
-          </div>
-          <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}">
-          </div>
-          <div class="mb-3">
-            <label for="enterprise" class="form-label">Empresa a la que pertenece</label>
-            <select  class="form-select" id="enterprise" th:field="*{enterprise.id}">
-              <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.id}"></option>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <h1 class="pt-3 pb-2 border-bottom">Actualizar usuario</h1>
+          <form th:method="patch" th:action="@{/users/update/{id}(id=*{id})}" th:object="${updateUser}" class="mb-5">
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="username" th:field="*{profile.username}" >
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" th:field="*{email}">
+            </div>
+            <div class="mb-3">
+              <label for="enterprise" class="form-label">Empresa a la que pertenece</label>
+              <select  class="form-select" id="enterprise" th:field="*{enterprise.id}">
+                <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.id}"></option>
 
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="role" class="form-label">Rol</label>
-            <select  class="form-select" id="role" th:field="*{roleName}">
-              <option th:each="role : ${roles}" th:text="${role.name}" th:value="${role.name}"></option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="inputPassword" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="inputPassword" th:field="*{profile.password}">
-          </div>
-          <div class="mb-3">
-            <label for="imagen" class="form-label">Imagen</label>
-            <input type="text" class="form-control" id="imagen" th:field="*{profile.image}">
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Telefono</label>
-            <input type="text" class="form-control" id="phone" th:field="*{profile.phone}">
-          </div>
-          <button type="submit" class="btn btn-success">Registrar</button>
-        </form>
-      </main>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="role" class="form-label">Rol</label>
+              <select  class="form-select" id="role" th:field="*{roleName}">
+                <option th:each="role : ${roles}" th:text="${role.name}" th:value="${role.name}"></option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword" th:field="*{profile.password}">
+            </div>
+            <div class="mb-3">
+              <label for="imagen" class="form-label">Imagen</label>
+              <input type="text" class="form-control" id="imagen" th:field="*{profile.image}">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="phone" th:field="*{profile.phone}">
+            </div>
+            <button type="submit" class="btn btn-success">Actualizar</button>
+          </form>
+        </main>
       </div>
       <div sec:authorize="hasRole('OPERARIO')">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
