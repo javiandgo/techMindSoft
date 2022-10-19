@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 public class MovementController {
-    
+
     @Autowired
     private MovementService movementService;
 
-    @GetMapping("/movements")
+    @GetMapping("/rest/movements")
     public ResponseEntity<List<MovementMoney>> getMovements(){
 
         return new ResponseEntity<>(
@@ -24,8 +24,8 @@ public class MovementController {
                 HttpStatus.OK
         );
     }
-    
-    @GetMapping("/movement/{id}")
+
+    @GetMapping("/rest/movement/{id}")
     public ResponseEntity<Object> getMovement(@PathVariable Long id) {
         try {
             MovementMoney movementMoney = movementService.getMovement(id);
@@ -36,7 +36,7 @@ public class MovementController {
         }
     }
 
-    @GetMapping("/enterprises/{id}/movements")
+    @GetMapping("/rest/enterprises/{id}/movements")
     public ResponseEntity<MovementMoney> getIdEnterprise(@PathVariable Long id) {
         return new ResponseEntity<>(
                 movementService.getMovementMoneyByEnterpriseId(id),
@@ -45,7 +45,7 @@ public class MovementController {
     }
 
 
-    @PostMapping("/enterprises/movement")
+    @PostMapping("/rest/enterprises/movement")
     public ResponseEntity<Response> postMovement(@RequestBody MovementMoney movementMoney) {
         return new ResponseEntity<>(
                 new Response("Movimiento agregado exitosamente",
@@ -54,7 +54,7 @@ public class MovementController {
     }
 
 
-    @PatchMapping("/movement/{id}")
+    @PatchMapping("/rest/movement/{id}")
     public ResponseEntity<Response> patchMovement(@RequestBody MovementMoney movementMoney, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
@@ -67,7 +67,7 @@ public class MovementController {
         }
     }
 
-    @DeleteMapping("enterprises/{id}/movements")
+    @DeleteMapping("/rest/enterprises/{id}/movements")
     public ResponseEntity<Response> deleteMovement(@PathVariable Long id) {
         return new ResponseEntity<>(
                 new Response(movementService.deleteMovement(id), null),

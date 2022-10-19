@@ -15,7 +15,7 @@ public class EnterpriseController {
 
     @Autowired
     private EnterpriseService enterpriseService;
-    @GetMapping("/enterprises")
+    @GetMapping("/rest/enterprises")
     public ResponseEntity<List<Enterprise>> getEnterprises() {
 
         return new ResponseEntity<List<Enterprise>>(
@@ -24,7 +24,7 @@ public class EnterpriseController {
         );
     }
 
-    @GetMapping("/enterprise/{id}")
+    @GetMapping("/rest/enterprise/{id}")
     public ResponseEntity<Object> getEnterprise(@PathVariable Long id) {
 
         try {
@@ -36,7 +36,7 @@ public class EnterpriseController {
         }
     }
 
-    @GetMapping("/enterprise")
+    @GetMapping("/rest/enterprise")
     public ResponseEntity<Object> getEnterprises(@RequestParam Long id) {
         try {
             Enterprise enterprise = enterpriseService.getEnterprise(id);
@@ -47,7 +47,7 @@ public class EnterpriseController {
         }
     }
 
-    @PostMapping("/enterprises")
+    @PostMapping("/rest/enterprises")
     public ResponseEntity<Response> postEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
                 new Response("Empresa creada exitosamente",
@@ -55,7 +55,7 @@ public class EnterpriseController {
                 HttpStatus.OK);
     }
 
-    @PutMapping("/enterprise")
+    @PutMapping("/rest/enterprise")
     public ResponseEntity<Response> putEnterprise(@RequestBody Enterprise enterprise) {
         return new ResponseEntity<>(
                 new Response("Empresa Actualizada Exitosamente",
@@ -63,7 +63,7 @@ public class EnterpriseController {
                 ,HttpStatus.OK);
     }
 
-    @PatchMapping("/enterprise/{id}")
+    @PatchMapping("/rest/enterprise/{id}")
     public ResponseEntity<Response> patchEnterprise(@RequestBody Enterprise enterprise, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(
@@ -76,7 +76,7 @@ public class EnterpriseController {
         }
     }
 
-    @DeleteMapping("enterprise/{id}")
+    @DeleteMapping("/rest/enterprise/{id}")
     public ResponseEntity<Response> deleteEnterprise(@PathVariable Long id) {
         return new ResponseEntity<>(
                 new Response(enterpriseService.deleteEnterprise(id), null),

@@ -1,21 +1,17 @@
 package com.techmind.enterprise.Controller.Frontend;
 
 import com.techmind.enterprise.Model.Employee;
-import com.techmind.enterprise.Model.Profile;
-import com.techmind.enterprise.Model.Response;
 import com.techmind.enterprise.Model.RoleName;
 import com.techmind.enterprise.Services.EnterpriseService;
 import com.techmind.enterprise.Services.ProfileService;
 import com.techmind.enterprise.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class FrontUserController {
+public class UsersController {
 
     @Autowired
     UserService userService;
@@ -57,6 +53,7 @@ public class FrontUserController {
 
     @PostMapping("/users/add")
     public String postUser(@ModelAttribute("formAddUser") Employee employee){
+        System.out.println(employee);
         userService.saveEmployee(employee);
         return "redirect:/users";
     }

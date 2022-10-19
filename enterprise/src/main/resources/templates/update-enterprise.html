@@ -5,7 +5,7 @@
   <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
   <!-- Custom styles for this template -->
   <link th:href="@{/css/dashboard.css}" rel="stylesheet">
-  <title>Usuarios</title>
+  <title>Añadir Usuario</title>
 </head>
 
 <body>
@@ -41,13 +41,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/users">
+              <a class="nav-link" href="/users">
                 <span data-feather="shopping-cart" class="align-text-bottom"></span>
                 Usuarios
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/enterprises">
+              <a class="nav-link active" href="/enterprises">
                 <span data-feather="users" class="align-text-bottom"></span>
                 Empresas
               </a>
@@ -55,50 +55,40 @@
           </ul>
         </div>
       </nav>
+      <div sec:authorize="hasRole('ADMIN')">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <h1 class="pt-3 pb-2 border-bottom">Actualizar empresa</h1>
+          <form th:method="patch" th:action="@{/enterprises/update/{id}(id=*{id})}" th:object="${updateEnterprise}" class="mb-5">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="address" th:field="*{address}">
+            </div>
+            <div class="mb-3">
+              <label for="document" class="form-label">NIT</label>
+              <input type="text" class="form-control" id="document" th:field="*{document}">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="phone" th:field="*{phone}">
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
+          </form>
+        </main>
+      </div>
+      <div sec:authorize="hasRole('OPERARIO')">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="alert alert-warning mt-5" role="alert">
+            Debes ser un Administrador para agregar empresas
+          </div>
+        </main>
+      </div>
 
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <h1 class="pt-3 pb-2 border-bottom">Usuarios</h1>
-        <sec:authorize access="hasRole('ADMIN')">
-        <a href="/users/add-new" class="btn btn-primary mb-2 mt-2">Agregar un usuario</a>
-        </sec:authorize>
-        <div class="table-responsive">
-          <table class="table align-middle table-bordered table-striped table-hover col-12">
-            <thead>
-            <tr>
-              <th scope="col">Nombre de usuario</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Email</th>
-              <th scope="col">Contraseña</th>
-              <th scope="col">Rol</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="employee : ${usuarios}">
-              <td th:text="${employee.profile.username}"></td>
-              <td th:text="${employee.name}"></td>
-              <td th:text="${employee.email}"></td>
-              <td th:text="${employee.profile.password}"></td>
-              <td th:text="${employee.roleName}"></td>
-              <td th:text="${employee.profile.phone}"></td>
-              <td class="text-center">
-                <div sec:authorize="hasRole('ADMIN')">
-                  <form th:method="delete" th:action="@{/users/delete/{id}(id=${employee.id})}" >
-                    <button class="btn btn-danger mb-1" type="submit">Borrar usuario</button>
-                  </form>
-                  <form th:method="get" th:action="@{/users/update/{id}(id=${employee.id})}">
-                    <button class="btn btn-warning" type="submit">Editar</button>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
     </div>
-    </main>
   </div>
-</div>
 
 </div>
 <aside sec:authorize="!isAuthenticated()">

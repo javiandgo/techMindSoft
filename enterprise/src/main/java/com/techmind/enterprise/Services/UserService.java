@@ -33,6 +33,9 @@ public class UserService {
     }
 
     public Employee saveEmployee(Employee employee_param) {
+
+        System.out.println(employee_param);
+
         return userRepository.save(employee_param);
     }
 
@@ -60,8 +63,12 @@ public class UserService {
                 employeeBD.setEnterprise(employee_param.getEnterprise());
             }
 
-            if (employee_param.getProfile() != null) {
-                employeeBD.setProfile(employee_param.getProfile());
+            if (employee_param.getProfile().getPassword() != null) {
+                employeeBD.setProfilePassword(employee_param.getProfilePassword());
+            }
+
+            if (employee_param.getProfile().getUsername() != null) {
+                employeeBD.setProfileUsername(employee_param.getProfileUsername());
             }
 
             return saveEmployee(employeeBD);

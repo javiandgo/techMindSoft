@@ -126,6 +126,35 @@ public class Employee {
         this.profile = profile;
     }
 
+    public Profile getProfilePassword() {
+        String password = profile.getPassword();
+
+        return profile;
+    }
+
+    public void setProfilePassword(Profile profile) {
+
+        String password = profile.getPassword();
+
+        this.profile.setPassword(password);
+
+    }
+
+    public Profile getProfileUsername() {
+        String username = profile.getUsername();
+
+        return profile;
+    }
+
+    public void setProfileUsername(Profile profile) {
+
+        String username = profile.getUsername();
+
+        this.profile.setUsername(username);
+
+    }
+
+
 
     @Override
     public String toString() { 
