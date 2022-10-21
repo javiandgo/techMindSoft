@@ -5,7 +5,7 @@
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <!-- Custom styles for this template -->
     <link th:href="@{/css/dashboard.css}" rel="stylesheet">
-    <title>Añadir Usuario</title>
+    <title>Usuarios</title>
 </head>
 
 <body>
@@ -55,34 +55,44 @@
                     </ul>
                 </div>
             </nav>
-            <div sec:authorize="hasAnyRole('ADMIN', 'OPERARIO')">
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    <h1 class="pt-3 pb-2 border-bottom">Agregar un movimiento</h1>
-                    <form method="post" th:action="@{/transactions/add}" th:object="${addTransaction}" class="mb-5">
-                        <div class="mb-3">
-                            <label for="amountMovement" class="form-label">Cantidad</label>
-                            <input type="number" class="form-control" id="amountMovement" th:field="*{amountMovement}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="detailMovement" class="form-label">Detalle del movimiento</label>
-                            <input type="text" class="form-control" id="detailMovement" th:field="*{detailMovement}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="enterprise" class="form-label">Empresa</label>
-                            <select  class="form-select" id="enterprise" th:field="*{enterprise}">
-                                <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.id}"></option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="employee" class="form-label">Responsable</label>
-                            <select  class="form-select" id="employee" th:field="*{employee}">
-                                <option th:each="employee : ${empleados}" th:text="${employee.name}" th:value="${employee.id}"></option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Registrar</button>
-                    </form>
-                </main>
-            </div>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <h1 class="pt-3 pb-2 border-bottom">Todos los movimientos</h1>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <a href="/transactions/add-new" class="btn btn-primary mb-2 mt-2">Agregar un movimiento</a>
+                </sec:authorize>
+                <div class="table-responsive">
+                    <table class="table align-middle table-bordered table-striped table-hover col-12">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Concepto</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Responsable</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="movements : ${movementsByEnterprise}">
+                            <td th:text="${movements.amountMovement}"></td>
+                            <td th:text="${movements.detailMovement}"></td>
+                            <td th:text="${movements.enterprise.name}"></td>
+                            <td th:text="${movements.employee.name}"></td>
+                            <td class="text-center">
+                                <div sec:authorize="hasRole('ADMIN')">
+                                    <form th:method="delete" th:action="@{/transaction/delete/{id}(id=${movements.id})}" >
+                                        <button class="btn btn-danger mb-1" type="submit">Borrar movimiento</button>
+                                    </form>
+                                    <form th:method="get" th:action="@{/transaction/update/{id}(id=${movements.id})}">
+                                        <button class="btn btn-warning" type="submit">Editar</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
         </div>
     </div>
 

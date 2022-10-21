@@ -156,19 +156,5 @@ public class Employee {
 
 
 
-    @Override
-    public String toString() { 
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", roleName=" + roleName +
-                ", createAt=" + createAt +
-                ", updateAt=" + updateAt +
-                ", enterprise=" + enterprise +
-                ", movementMoney=" + movementMoney +
-                ", profile=" + profile +
-                '}';
-    }
 }
 

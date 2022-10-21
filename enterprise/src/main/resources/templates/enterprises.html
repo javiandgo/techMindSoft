@@ -79,11 +79,11 @@
               <td th:text="${enterprise.address}"></td>
               <td th:text="${enterprise.document}"></td>
               <td th:text="${enterprise.phone}"></td>
-              <td><a th:href="@{/enterprises/{id}/movements(id=${enterprise.id})}">Ver movimientos</a></td>
+              <td><a th:href="@{/enterprises/{id}/transactions(id=${enterprise.id})}">Ver movimientos</a></td>
               <td class="text-center">
                 <div sec:authorize="hasRole('ADMIN')">
                   <form th:method="delete" th:action="@{/enterprises/delete/{id}(id=${enterprise.id})}" >
-                    <button class="btn btn-danger mb-1" type="submit">Borrar empresa</button>
+                    <button class="btn btn-danger mb-1" type="submit">Borrar</button>
                   </form>
                   <form th:method="get" th:action="@{/enterprises/update/{id}(id=${enterprise.id})}">
                     <button class="btn btn-warning" type="submit">Editar</button>

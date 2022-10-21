@@ -34,8 +34,6 @@ public class UserService {
 
     public Employee saveEmployee(Employee employee_param) {
 
-        System.out.println(employee_param);
-
         return userRepository.save(employee_param);
     }
 

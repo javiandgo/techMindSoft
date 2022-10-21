@@ -37,7 +37,7 @@ public class MovementController {
     }
 
     @GetMapping("/rest/enterprises/{id}/movements")
-    public ResponseEntity<MovementMoney> getIdEnterprise(@PathVariable Long id) {
+    public ResponseEntity<List<MovementMoney>> getIdEnterprise(@PathVariable Long id) {
         return new ResponseEntity<>(
                 movementService.getMovementMoneyByEnterpriseId(id),
                 HttpStatus.OK

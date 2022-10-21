@@ -53,7 +53,6 @@ public class UsersController {
 
     @PostMapping("/users/add")
     public String postUser(@ModelAttribute("formAddUser") Employee employee){
-        System.out.println(employee);
         userService.saveEmployee(employee);
         return "redirect:/users";
     }

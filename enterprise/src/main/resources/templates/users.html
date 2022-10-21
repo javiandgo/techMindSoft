@@ -85,7 +85,7 @@
               <td class="text-center">
                 <div sec:authorize="hasRole('ADMIN')">
                   <form th:method="delete" th:action="@{/users/delete/{id}(id=${employee.id})}" >
-                    <button class="btn btn-danger mb-1" type="submit">Borrar usuario</button>
+                    <button class="btn btn-danger mb-1" type="submit">Borrar</button>
                   </form>
                   <form th:method="get" th:action="@{/users/update/{id}(id=${employee.id})}">
                     <button class="btn btn-warning" type="submit">Editar</button>

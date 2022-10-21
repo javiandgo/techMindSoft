@@ -31,9 +31,10 @@ public class MovementService {
         }
     }
 
-    public MovementMoney getMovementMoneyByEnterpriseId(Long idEnterprise){
+    public List<MovementMoney> getMovementMoneyByEnterpriseId(Long idEnterprise){
         return movementRepository.findByEnterpriseId(idEnterprise);
     }
+
 
     public MovementMoney saveMovement(MovementMoney movement_param) {
         return movementRepository.save(movement_param);
@@ -66,9 +67,11 @@ public class MovementService {
 
             if (movement_param.getCreateAt() == null) {
                 movementBD.setCreateAt(new Date());
+                movementBD.setUpdateAt(new Date());
+            } else if (movement_param.getCreateAt() != null) {
+                movementBD.setUpdateAt(new Date());
             }
 
-            movementBD.setUpdateAt(new Date());
 
             return saveMovement(movementBD);
 
