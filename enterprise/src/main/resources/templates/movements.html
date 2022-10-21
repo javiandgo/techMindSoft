@@ -61,11 +61,11 @@
                 <sec:authorize access="hasRole('ADMIN')">
                     <a href="/transactions/add-new" class="btn btn-primary mb-2 mt-2">Agregar un movimiento</a>
                 </sec:authorize>
-                <form  method="get" th:action="@{/enterprises/{id}/transactions(id=*{name})}" th:object="${movementsByEnterprise}"  class="row g-3">
+                <form  th:method="get" th:action="@{/transactions/enterprise}"  class="row g-3">
                     <div class="col-auto">
                         <label for="enterprise" class="visually-hidden">Filtrar por empresa: </label>
-                        <select  class="form-select" id="enterprise">
-                            <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.name}"></option>
+                        <select  class="form-select" id="enterprise" th:name="id">
+                            <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.id}"></option>
                         </select>
                     </div>
                     <div class="col-auto">
