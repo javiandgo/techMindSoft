@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <title>Panel de Control</title>
+</head>
+
+<body>
+<div sec:authorize="isAuthenticated()">
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">techMind Soft</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Buscar..." aria-label="Search">
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="#" th:href="@{/logout}" > Cerrar sesión </a>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/dashboard">
+                            <span data-feather="home" class="align-text-bottom"></span>
+                            Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/transactions">
+                            <span data-feather="file" class="align-text-bottom"></span>
+                            Movimientos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">
+                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                            Usuarios
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/enterprises">
+                            <span data-feather="users" class="align-text-bottom"></span>
+                            Empresas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div id="featured-3">
+                <h1 class="pt-3 pb-2 border-bottom">Panel de Control</h1>
+                <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 text-center">
+                    <div class="feature col">
+                        <h3 class="fs-2">Movimientos</h3>
+                        <a href="/transactions" class="btn btn-primary">
+                            Administrar Movimientos
+                        </a>
+                    </div>
+                    <div class="feature col">
+                        <h3 class="fs-2">Usuarios</h3>
+                        <a href="/users" class="btn btn-primary">
+                            Administrar Usuarios
+                        </a>
+                    </div>
+                    <div class="feature col">
+                        <h3 class="fs-2">Empresas</h3>
+                        <a href="/enterprises" class="btn btn-primary">
+                            Administrar Empresas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+</div>
+<aside sec:authorize="!isAuthenticated()">
+    <div class="alert alert-danger" role="alert">
+        Debes <a href="/login">Iniciar Sesión</a> acceder a esta sección.
+    </div>
+</aside>
+<script src="js/sidebars.js"></script>
+<script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>
