@@ -61,6 +61,18 @@
                 <sec:authorize access="hasRole('ADMIN')">
                     <a href="/transactions/add-new" class="btn btn-primary mb-2 mt-2">Agregar un movimiento</a>
                 </sec:authorize>
+                <form  th:method="get" th:action="@{/transactions/enterprise}"  class="row g-3">
+                    <div class="col-auto">
+                        <label for="enterprise" class="visually-hidden">Filtrar por empresa: </label>
+                        <select  class="form-select" id="enterprise" th:name="id">
+                            <option th:each="enterprise : ${empresas}" th:text="${enterprise.name}" th:value="${enterprise.id}"></option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-info mb-3">Buscar</button>
+                        <input type="submit" class="btn btn-secondary mb-3" value="Limpiar">
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table align-middle table-bordered table-striped table-hover col-12">
                         <thead>

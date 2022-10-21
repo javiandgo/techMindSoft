@@ -34,12 +34,14 @@ public class MovementsController {
     public String getMovementsByEnterprise(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
         model.addAttribute("movementsByEnterprise", movementService.getMovementMoneyByEnterpriseId(id));
+        model.addAttribute("empresas", enterpriseService.getEnterprises());
         return "movements-by-enterprise";
     }
 
     @GetMapping("/transactions/enterprise")
     public String getTransactionsByEnterprise(Model model, @Param("id") Long id) {
         model.addAttribute("movementsByEnterprise", movementService.getMovementMoneyByEnterpriseId(id));
+        model.addAttribute("empresas", enterpriseService.getEnterprises());
         return "movements-by-enterprise";
     }
 
