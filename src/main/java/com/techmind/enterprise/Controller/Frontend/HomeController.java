@@ -25,7 +25,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String getIndex() {
-        return "dashboard";
+        return "login";
     }
 
 
